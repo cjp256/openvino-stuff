@@ -12,6 +12,6 @@ lxc config device add $CONTAINER_NAME microdia-compute-stick usb vendorid=0c45 p
 
 lxc config device add $CONTAINER_NAME myriad-booted usb vendorid=03e7 productid=f63b
 
-lxc file push install-openvino.sh $CONTAINER_NAME/tmp/
+#lxc file push install-openvino.sh $CONTAINER_NAME/tmp/
 
-lxc exec $CONTAINER_NAME bash /tmp/install-openvino.sh
+#lxc exec $CONTAINER_NAME bash /tmp/install-openvino.sh
