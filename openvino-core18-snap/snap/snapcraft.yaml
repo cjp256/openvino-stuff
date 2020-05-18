@@ -16,6 +16,7 @@ parts:
       ./bootstrap
       make -j4
       make install DESTDIR=$SNAPCRAFT_PART_INSTALL
+      make install DESTDIR=/
     build-packages:
       - build-essential
       - libssl-dev
