@@ -84,7 +84,6 @@ parts:
       - libavutil55
       - libbluray2
       - libchromaprint1
-      - libcrystalhd3
       - libdc1394-22
       - libdrm2
       - libgme0
