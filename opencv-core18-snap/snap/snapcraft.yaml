@@ -1,0 +1,88 @@
+name: opencv-core18
+base: core18
+version: git
+summary: OpenCV
+description: OpenCV Sanp
+
+grade: devel
+confinement: strict
+
+parts:
+  opencv:
+    source: git://github.com/opencv/opencv
+    plugin: cmake
+    configflags:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DBUILD_TESTS=OFF
+      - -DINSTALL_PYTHON_EXAMPLES=ON
+      - -DOPENCV_ENABLE_NONFREE=ON
+      - -DCMAKE_SHARED_LINKER_FLAGS=-latomic
+      - -DBUILD_EXAMPLES=ON
+    build-packages:
+      - build-essential
+      - cmake
+      - libavcodec-dev
+      - libavformat-dev
+      - libgtk2.0-dev
+      - libswscale-dev
+      - pkg-config
+      - python3-dev
+      - libtbb-dev
+      - libpng-dev
+      - libtiff-dev
+      - libdc1394-22-dev
+      - libjpeg-dev
+    stage-packages:
+      - libatk1.0-0
+      - libavcodec57
+      - libavformat57
+      - libavutil55
+      - libbluray2
+      - libchromaprint1
+      - libcrystalhd3
+      - libdc1394-22
+      - libdrm2
+      - libgme0
+      - libgomp1
+      - libgsm1
+      - libgtk2.0-0
+      - libmp3lame0
+      - libmpg123-0
+      - libnuma1
+      - libogg0
+      - libopenjp2-7
+      - libopenmpt0
+      - libopus0
+      - libraw1394-11
+      - libshine3
+      - libsnappy1v5
+      - libsoxr0
+      - libspeex1
+      - libssh-gcrypt-4
+      - libswresample2
+      - libswscale4
+      - libtheora0
+      - libtwolame0
+      - libusb-1.0-0
+      - libva-drm2
+      - libva-x11-2
+      - libva2
+      - libvdpau1
+      - libvorbis0a
+      - libvorbisenc2
+      - libvorbisfile3
+      - libvpx5
+      - libwavpack1
+      - libwebp6
+      - libwebpmux3
+      - libx264-152
+      - libx265-146
+      - libxcomposite1
+      - libxcursor1
+      - libxdamage1
+      - libxi6
+      - libxinerama1
+      - libxrandr2
+      - libxvidcore4
+      - libzvbi0
