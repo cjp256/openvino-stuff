@@ -51,14 +51,10 @@ parts:
        cmake -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
        make -j4
        make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-#      if [ ! -d opencv_contrib ]; then
-#        git clone https://github.com/opencv/opencv_contrib.git
-#      else
     after: [opencv, cmake]
   opencv:
     source: git://github.com/opencv/opencv
     plugin: cmake
-    after: [cmake]
     configflags:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
@@ -67,186 +63,42 @@ parts:
       - -DOPENCV_ENABLE_NONFREE=ON
       - -DCMAKE_SHARED_LINKER_FLAGS=-latomic
       - -DBUILD_EXAMPLES=ON
-#      - -DOPENCV_EXTRA_MODULES_PATH=opencv_contrib/modules
     build-packages:
-      - bison
       - build-essential
       - cmake
-      - cpio
-      - ffmpeg
-      - flex
-      - gettext
-      - gfortran
-      - gobject-introspection
-      - gstreamer1.0-plugins-bad
-      - gstreamer1.0-plugins-base
-      - gstreamer1.0-plugins-good
-      - iso-codes
-      - liba52-0.7.4
-      - libaa1
-      - libasound2
-      - libass9
-      - libatlas-base-dev
-      - libavc1394-0
       - libavcodec-dev
       - libavformat-dev
-      - libbluetooth3
-      - libbs2b0
-      - libbz2-1.0
-      - libcaca0
-      - libcap2
-      - libcap2-bin
-      - libcdparanoia0
-      - libchromaprint1
-      - libdc1394-22
       - libdc1394-22-dev
-      - libdca0
-      - libde265-0
-      - libdirectfb-1.7-7
-      - libdrm-dev
-      - libdv4
-      - libdvdnav4
-      - libfaac0
-      - libfdk-aac1
-      - libflac8
-      - libflite1
-      - libfluidsynth-dev
-      - libgbm1
-      - libgdk-pixbuf2.0-0
-      - libgirepository-1.0-1
-      - libgl1-mesa-dri
-      - libgl-dev
-      - libgles2
-      - libglib2.0-0
-      - libgme0
-      - libgmp10
-      - libgraphene-1.0-0
-      - libgsl23
-      - libgsm1
-      - libgstreamer1.0-0
-      - libgstreamer1.0-dev
-      - libgstreamer-plugins-base1.0-dev
-      - libgudev-1.0-dev
-      - libhdf5-dev
-      - libiec61883-0
-      - libjpeg8
-      - libjpeg-dev
-      - libkate1
-      - liblapacke-dev
-      - liblcms2-2
-      - liblrdf0
-      - libmjpegtools-dev
-      - libmms0
-      - libmodplug1
-      - libmp3lame0
-      - libmpcdec6
-      - libmpeg2-4
-      - libmpg123-0
-      - libneon27
-      - libnettle6
-      - libnice10
-      - libopenal1
-      - libopencore-amrnb0
-      - libopencore-amrwb0
-      - libopenexr-dev
-      - libopenjp2-7
-      - libopenjp2-7-dev
-      - libopenmpt0
-      - libopenni2-0
-      - libopus0
-      - libpango-1.0-0
+      - libgtk2.0-dev
+      - libjpeg-dev      
       - libpng-dev
-      - libpulse0
-      - libraw1394-11
-      - librsvg2-2
-      - librtmp1
-      - libsbc1
-      - libsndfile1
-      - libsoundtouch1
-      - libsoup2.4-1
-      - libspandsp2
-      - libspeex1
-      - libsrtp2-1
-      - libssh2-1
-      - libssh-4
       - libswscale-dev
-      - libtag-extras1
-      - libtheora0
+      - libtbb-dev
       - libtiff-dev
-      - libtwolame0
-      - libudev1
-      - libusb-dev
-      - libv4l-0
-      - libv4l-dev
-      - libva2
-      - libvisual-0.4-0
-      - libvo-aacenc0
-      - libvo-amrwbenc0
-      - libvorbis0a
-      - libwavpack1
-      - libwebp6
-      - libwebp-dev
-      - libwebrtc-audio-processing1
-      - libwildmidi2
-      - libx11-6
-      - libx264-dev
-      - libxkbcommon0
-      - libxrandr2
-      - libxv1
-      - libxvidcore-dev
-      - libzbar0
-      - libzvbi0
       - pkg-config
       - python3-dev
-      - python3-gi
-      - python3-numpy
-      - python3-pip
-      - python3-scipy
     stage-packages:
-      - python3-numpy
-      - python3-pip
-      - gfortran
-      - libatlas3-base
+      - libatk1.0-0
       - libavcodec57
       - libavformat57
       - libavutil55
       - libbluray2
-      - libcairo2
       - libchromaprint1
-      - libcroco3
       - libcrystalhd3
-      - libdatrie1
       - libdc1394-22
       - libdrm2
-      - libfontconfig1
-      - libfreetype6
-      - libgdk-pixbuf2.0-0
       - libgme0
-      - libgraphite2-3
+      - libgomp1
       - libgsm1
-      - libgstreamer-plugins-base1.0-0
-      - libgstreamer1.0-0
-      - libharfbuzz0b
-      - libicu60
-      - libilmbase12
-      - libjbig0
-      - libjpeg-turbo8
+      - libgtk2.0-0
       - libmp3lame0
       - libmpg123-0
       - libnuma1
       - libogg0
-      - libopenexr22
       - libopenjp2-7
       - libopenmpt0
       - libopus0
-      - liborc-0.4-0
-      - libpango-1.0-0
-      - libpangocairo-1.0-0
-      - libpangoft2-1.0-0
-      - libpixman-1-0
-      - libpng16-16
       - libraw1394-11
-      - librsvg2-2
       - libshine3
       - libsnappy1v5
       - libsoxr0
@@ -254,9 +106,7 @@ parts:
       - libssh-gcrypt-4
       - libswresample2
       - libswscale4
-      - libthai0
       - libtheora0
-      - libtiff5
       - libtwolame0
       - libusb-1.0-0
       - libva-drm2
@@ -270,33 +120,13 @@ parts:
       - libwavpack1
       - libwebp6
       - libwebpmux3
-      - libx11-6
       - libx264-152
       - libx265-146
-      - libxau6
-      - libxcb-render0
-      - libxcb-shm0
-      - libxcb1
-      - libxdmcp6
-      - libxext6
-      - libxfixes3
-      - libxml2
-      - libxrender1
+      - libxcomposite1
+      - libxcursor1
+      - libxdamage1
+      - libxi6
+      - libxinerama1
+      - libxrandr2
       - libxvidcore4
       - libzvbi0
-    override-build: |
-       export
-       unset CPPFLAGS
-       unset CFLAGS
-       unset CXXFLAGS
-
-       cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=OFF -DINSTALL_PYTHON_EXAMPLES=ON -DOPENCV_ENABLE_NONFREE=ON -DCMAKE_SHARED_LINKER_FLAGS=-latomic -DBUILD_EXAMPLES=ON
-       make -j4
-       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-#      if [ ! -d opencv_contrib ]; then
-#        git clone https://github.com/opencv/opencv_contrib.git
-#      else
-#        cd opencv_contrib
-#        git pull
-#        cd ...
-#      fi
