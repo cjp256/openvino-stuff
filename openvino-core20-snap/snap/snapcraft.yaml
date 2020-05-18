@@ -1,6 +1,6 @@
 name: openvino-core20-example
 base: core20
-version: 'git'
+version: 'v0.0000001'
 summary: Intel's OpenVINO Toolkit example
 description: |
   Example for OpenVINO snaps.
@@ -9,18 +9,37 @@ grade: devel
 confinement: strict
 
 parts:
+  openvino:
+    source: git://github.com/openvinotoolkit/openvino
+    plugin: cmake
+    build-environment:
+      - OpenCV_DIR: $SNAPCRAFT_STAGE
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/
+      - -DPYTHON_EXECUTABLE=/usr/bin/python3.8
+      - -DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/cmake/opencv4
+    build-packages:
+      - bison
+      - libgtk2.0-dev
+      - pkg-config
+      - libavcodec-dev
+      - python3-dev
+      - libavformat-dev
+      - libswscale-dev
+      - python3-pip
+      - libusb-1.0-0-dev
+    after: [opencv]
   opencv:
     source: git://github.com/opencv/opencv
     plugin: cmake
     cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=RELEASE
-      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/
       - -DBUILD_TESTS=OFF
       - -DINSTALL_PYTHON_EXAMPLES=ON
       - -DOPENCV_ENABLE_NONFREE=ON
-      - -DCMAKE_SHARED_LINKER_FLAGS=-latomic
       - -DBUILD_EXAMPLES=ON
-#      - -DOPENCV_EXTRA_MODULES_PATH=opencv_contrib/modules
     build-packages:
       - bison
       - build-essential
@@ -167,9 +186,15 @@ parts:
        unset CFLAGS
        unset CXXFLAGS
 
-       cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=OFF -DINSTALL_PYTHON_EXAMPLES=ON -DOPENCV_ENABLE_NONFREE=ON -DCMAKE_SHARED_LINKER_FLAGS=-latomic -DBUILD_EXAMPLES=ON
+       cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=OFF -DINSTALL_PYTHON_EXAMPLES=ON -DOPENCV_ENABLE_NONFREE=ON -DCMAKE_SHARED_LINKER_FLAGS=-latomic -DBUILD_EXAMPLES=ON
        make -j4
+
+       # Install it into the build-environment.
+       make DESTDIR=/ install
+
+       # Install it for the snap.
        make DESTDIR=$SNAPCRAFT_PART_INSTALL install
+
 #      if [ ! -d opencv_contrib ]; then
 #        git clone https://github.com/opencv/opencv_contrib.git
 #      else

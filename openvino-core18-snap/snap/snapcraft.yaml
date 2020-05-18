@@ -16,7 +16,6 @@ parts:
       ./bootstrap
       make -j4
       make install DESTDIR=$SNAPCRAFT_PART_INSTALL
-      snapcraftctl build
     build-packages:
       - build-essential
       - libssl-dev
@@ -26,9 +25,7 @@ parts:
     build-environment:
       - FOO: bar
     configflags:
-      - –DCMAKE_BUILD_TYPE=Release
-    build-snaps:
-      - cmake
+      - -DCMAKE_BUILD_TYPE=Release
     build-packages:
       - bison
       - libgtk2.0-dev
