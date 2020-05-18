@@ -27,8 +27,12 @@ parts:
       - FOO: bar
     configflags:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DPYTHON_EXECUTABLE=/usr/bin/python3.6
     build-packages:
+      - autoconf
+      - automake
       - bison
+      - libtool
       - libgtk2.0-dev
       - pkg-config
       - libavcodec-dev
@@ -37,6 +41,7 @@ parts:
       - libswscale-dev
       - python3-pip
       - libusb-1.0-0-dev
+      - wget
     after: [opencv, cmake]
   opencv:
     source: git://github.com/opencv/opencv
