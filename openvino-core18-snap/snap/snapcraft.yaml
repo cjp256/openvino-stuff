@@ -42,6 +42,18 @@ parts:
       - python3-pip
       - libusb-1.0-0-dev
       - wget
+    override-build: |
+       export
+       unset CPPFLAGS
+       unset CFLAGS
+       unset CXXFLAGS
+
+       cmake -DCMAKE_BUILD_TYPE=Relase -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
+       make -j4
+       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
+#      if [ ! -d opencv_contrib ]; then
+#        git clone https://github.com/opencv/opencv_contrib.git
+#      else
     after: [opencv, cmake]
   opencv:
     source: git://github.com/opencv/opencv
