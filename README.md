@@ -1,4 +1,4 @@
-* Setup Instructions
+# Setup Instructions
 
 Setup udev rules to give all users access to Intel Compute stick devices:
 
@@ -8,7 +8,7 @@ $ ./install-udev-rules.sh
 $ reboot
 ```
 
-* Tested OS / Hardware
+# Tested OS / Hardware
 
 - Ubuntu 20.04, 18.04 Desktop & Server (amd64 PCs)
 
@@ -20,19 +20,21 @@ $ reboot
 
   - Download: https://ubuntu.com/download/raspberry-pi
 
-* Build Instructions
+# Build Instructions
+
+Build the examples snap (all-in-one, openvino + opencv + examples):
 
 ```
 $ cd openvino-examples-snap
 $ snapcraft --use-lxd
 ```
 
-* Run Instructions
+# Run Instructions
 
 Install snap and connect required interfaces:
 
 ```
-$ sudo snap install openvino-examples --dangerous
+$ sudo snap install openvino-examples*.snap --dangerous
 $ for x in hardware-observe home mount-observe network-bind network-control network-observe raw-usb; do sudo snap connect openvino-examples:$x done
 ```
 
