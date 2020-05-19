@@ -53,7 +53,7 @@ parts:
        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
        make -j4
        make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-       cp -r $SNAPCRAFT_PART_SRC/bin/intel64/Release $SNAPCRAFT_PART_INSTALL/examples
+       cp -r $SNAPCRAFT_PART_SRC/bin/*/Release $SNAPCRAFT_PART_INSTALL/examples
     after: [opencv, cmake]
   opencv:
     source: git://github.com/opencv/opencv

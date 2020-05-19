@@ -6,4 +6,4 @@ for x in hardware-observe home mount-observe network-bind network-control networ
   sudo snap connect openvino-core18-example:$x
 done
 
-openvino-core18-example.benchmark-app -m squeezenet1.1.xml -d MYRIAD
+openvino-core18-example.benchmark-app -m models/squeezenet1.1.xml -d MYRIAD
