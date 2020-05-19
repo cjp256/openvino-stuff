@@ -1,9 +1,9 @@
-name: openvino-core18-example
+name: openvino-examples
 base: core18
 version: '2020.2.120'
-summary: Intel's OpenVINO Toolkit example
+summary: Intel's OpenVINO Toolkit examples
 description: |
-  Example for OpenVINO snaps.
+  Example all-in-one snap.
 
 grade: devel
 confinement: strict
