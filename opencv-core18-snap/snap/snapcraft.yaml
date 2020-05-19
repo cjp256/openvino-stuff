@@ -1,6 +1,6 @@
 name: opencv-core18
 base: core18
-version: git
+version: '4.x'
 summary: OpenCV
 description: OpenCV Sanp
 
