@@ -6,7 +6,7 @@
 
   - Download: https://ubuntu.com/download/raspberry-pi
 
-- Ubuntu 20.04 aarch64 on Raspberry Pi 4
+- Ubuntu 20.04 aarch64 on Raspberry Pi 4 (in progress)
 
   - Download: https://ubuntu.com/download/raspberry-pi
 
