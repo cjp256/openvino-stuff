@@ -1,13 +1,3 @@
-# Setup Instructions
-
-Setup udev rules to give all users access to Intel Compute stick devices:
-
-```
-$ cd misc
-$ ./install-udev-rules.sh
-$ reboot
-```
-
 # Tested OS / Hardware
 
 - Ubuntu 20.04, 18.04 Desktop & Server (amd64 PCs)
@@ -19,6 +9,16 @@ $ reboot
 - Ubuntu 20.04 aarch64 on Raspberry Pi 4
 
   - Download: https://ubuntu.com/download/raspberry-pi
+
+# Setup Instructions
+
+Setup udev rules to give all users access to Intel Compute stick devices:
+
+```
+$ cd misc
+$ ./install-udev-rules.sh
+$ reboot
+```
 
 # Build Instructions
 
