@@ -1,134 +1,34 @@
-name: openvino-examples
+name: openvino-samples
 base: core18
 version: '2020.2.120'
-summary: Intel's OpenVINO Toolkit examples
+summary: Intel's OpenVINO Toolkit samples
 description: |
-  Example all-in-one snap.
+  Sample applications in OpenVINO.
 
 grade: devel
 confinement: strict
 
 apps:
   benchmark-app:
-    command: examples/benchmark_app
-    plugs: [home, hardware-observe, mount-observe, network-bind, network-control, network-observe, raw-usb]
+    command: bin/benchmark_app
+    extensions: [openvino-2020-3]
 
 parts:
-  cmake:
-    source: https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2.tar.gz
-    plugin: nil
-    override-build: |
-      ./bootstrap
-      make -j4
-      make install DESTDIR=$SNAPCRAFT_PART_INSTALL
-      make install DESTDIR=/
-    build-packages:
-      - build-essential
-      - libssl-dev
   openvino:
     source: git://github.com/openvinotoolkit/openvino
-    plugin: cmake
+    source-subdir: inference-engine/samples
+    source-branch: 2020.3.0
+    plugin: cmake    
     configflags:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPYTHON_EXECUTABLE=/usr/bin/python3.6
-    build-environment:
-      - OpenCV_DIR: $SNAPCRAFT_STAGE/usr
-      - PATH: /usr/lib/ccache:$PATH
-    build-packages:
-      - ccache
-      - autoconf
-      - automake
-      - bison
-      - libavcodec-dev
-      - libavformat-dev
-      - libgtk2.0-dev
-      - libswscale-dev
-      - libtool
-      - libusb-1.0-0-dev
-      - pkg-config
-      - python3-dev
-      - python3-pip
-      - wget
+      - -DCMAKE_INSTALL_PREFIX=/opt
     override-build: |
-       cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
-       make -j4
-       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-       cp -r $SNAPCRAFT_PART_SRC/bin/*/Release $SNAPCRAFT_PART_INSTALL/examples
-    after: [opencv, cmake]
-  opencv:
-    source: git://github.com/opencv/opencv
-    plugin: cmake
-    configflags:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DBUILD_TESTS=OFF
-      - -DINSTALL_PYTHON_EXAMPLES=ON
-      - -DOPENCV_ENABLE_NONFREE=ON
-      - -DCMAKE_SHARED_LINKER_FLAGS=-latomic
-      - -DBUILD_EXAMPLES=ON
-    build-packages:
-      - build-essential
-      - cmake
-      - libavcodec-dev
-      - libavformat-dev
-      - libdc1394-22-dev
-      - libgtk2.0-dev
-      - libjpeg-dev      
-      - libpng-dev
-      - libswscale-dev
-      - libtbb-dev
-      - libtiff-dev
-      - pkg-config
-      - python3-dev
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp -rv inference-engine/samples/intel64/Release/* $SNAPCRAFT_PART_INSTALL/bin
     stage-packages:
-      - libatk1.0-0
-      - libavcodec57
-      - libavformat57
-      - libavutil55
-      - libbluray2
-      - libchromaprint1
-      - libdc1394-22
-      - libdrm2
-      - libgme0
-      - libgomp1
-      - libgsm1
-      - libgtk2.0-0
-      - libmp3lame0
-      - libmpg123-0
-      - libnuma1
-      - libogg0
-      - libopenjp2-7
-      - libopenmpt0
-      - libopus0
-      - libraw1394-11
-      - libshine3
-      - libsnappy1v5
-      - libsoxr0
-      - libspeex1
-      - libssh-gcrypt-4
-      - libswresample2
-      - libswscale4
-      - libtheora0
-      - libtwolame0
-      - libusb-1.0-0
-      - libva-drm2
-      - libva-x11-2
-      - libva2
-      - libvdpau1
-      - libvorbis0a
-      - libvorbisenc2
-      - libvorbisfile3
-      - libvpx5
-      - libwavpack1
-      - libwebp6
-      - libwebpmux3
-      - libx264-152
-      - libx265-146
-      - libxcomposite1
-      - libxcursor1
-      - libxdamage1
-      - libxi6
-      - libxinerama1
-      - libxrandr2
-      - libxvidcore4
-      - libzvbi0
+      - libjbig0
+      - libjpeg-turbo8
+      - libpng16-16
+      - libtiff5
