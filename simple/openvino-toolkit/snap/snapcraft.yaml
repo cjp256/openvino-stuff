@@ -1,0 +1,31 @@
+name: openvino-toolkit
+base: core18
+version: '2020.3.194'
+summary: Intel's OpenVINO Toolkit
+description: |
+  SDK to build OpenVINO applications
+
+grade: devel
+confinement: strict
+
+parts:
+  openvino-toolkit:
+    source: http://registrationcenter-download.intel.com/akdlm/irc_nas/16670/l_openvino_toolkit_p_2020.3.194.tgz
+    plugin: nil
+    override-build: |
+      ./install.sh --accept_eula --silent --install_dir $SNAPCRAFT_PART_INSTALL/openvino-toolkit
+    build-packages:
+      - autoconf
+      - build-essential
+      - cmake
+      - cpio
+      - curl
+      - gnupg2
+      - libdrm2
+      - libglib2.0-0
+      - lsb-release
+      - libgtk-3-0
+      - libtool
+      - udev
+      - unzip
+      - dos2unix
