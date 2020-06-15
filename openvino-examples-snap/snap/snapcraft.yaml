@@ -1,6 +1,6 @@
 name: openvino-samples
 base: core18
-version: '2020.2.120'
+version: '2020.3.194'
 summary: Intel's OpenVINO Toolkit samples
 description: |
   Sample applications in OpenVINO.
