@@ -15,20 +15,23 @@ parts:
     override-build: |
       ./bootstrap
       make -j4
-      make install DESTDIR=$SNAPCRAFT_PART_INSTALL
       make install DESTDIR=/
+    build-environment:
+      - PATH: /usr/lib/ccache:$PATH
     build-packages:
+      - ccache
       - build-essential
       - libssl-dev
   openvino:
     source: git://github.com/openvinotoolkit/openvino
     plugin: cmake
-    configflags:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DPYTHON_EXECUTABLE=/usr/bin/python3.6
     build-environment:
-      - OpenCV_DIR: $SNAPCRAFT_STAGE/usr
+      - OpenCV_DIR: $SNAPCRAFT_STAGE/opencv
       - PATH: /usr/lib/ccache:$PATH
+    override-build: |
+      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino $SNAPCRAFT_PART_SRC
+      cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
+      cmake --build . --target install -- DESTDIR=/
     build-packages:
       - ccache
       - autoconf
@@ -44,23 +47,18 @@ parts:
       - python3-dev
       - python3-pip
       - wget
-    override-build: |
-       cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
-       make -j4
-       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
     after: [opencv, cmake]
   opencv:
     source: git://github.com/opencv/opencv
     plugin: cmake
-    configflags:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DBUILD_TESTS=OFF
-      - -DINSTALL_PYTHON_EXAMPLES=OFF
-      - -DOPENCV_ENABLE_NONFREE=ON
-      - -DCMAKE_SHARED_LINKER_FLAGS=-latomic
-      - -DBUILD_EXAMPLES=OFF
+    build-environment:
+      - PATH: /usr/lib/ccache:$PATH
+    override-build: |
+      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino/opencv $SNAPCRAFT_PART_SRC
+      cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
+      cmake --build . --target install -- DESTDIR=/
     build-packages:
+      - ccache
       - build-essential
       - cmake
       - libavcodec-dev
