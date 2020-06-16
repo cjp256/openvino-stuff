@@ -13,7 +13,9 @@ parts:
     source: http://registrationcenter-download.intel.com/akdlm/irc_nas/16670/l_openvino_toolkit_p_2020.3.194.tgz
     plugin: nil
     override-build: |
-      ./install.sh --accept_eula --ignore-cpu --silent --install_dir $SNAPCRAFT_PART_INSTALL/openvino
+      # installer requires no directory
+      rm -rf $SNAPCRAFT_PART_INSTALL
+      ./install.sh --accept_eula --ignore-cpu --silent --install_dir $SNAPCRAFT_PART_INSTALL
     build-packages:
       - autoconf
       - build-essential
