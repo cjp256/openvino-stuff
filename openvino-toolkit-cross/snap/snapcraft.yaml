@@ -24,12 +24,13 @@ parts:
       - libssl-dev
   openvino:
     source: git://github.com/openvinotoolkit/openvino
+    source-branch: "releases/2020/4"
     plugin: cmake
     build-environment:
       - OpenCV_DIR: $SNAPCRAFT_STAGE/opencv
       - PATH: /usr/lib/ccache:$PATH
     override-build: |
-      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino -DTHREADING=SEQ -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
+      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino -DTHREADING=SEQ -DPYTHON_EXECUTABLE=/usr/bin/python3.6 -DTREAT_WARNING_AS_ERROR=OFF $SNAPCRAFT_PART_SRC
       cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
       cmake --build . --target install -- DESTDIR=/
     build-packages:
