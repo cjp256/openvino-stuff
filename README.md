@@ -26,6 +26,7 @@ Build/install snapcraft with OpenVINO extension:
 
 ```
 $ git clone git://github.com/cjp256/snapcraft --branch openvino
+$ cd snapcraft
 $ snapcraft snap
 $ sudo snap install *.snap --dangerous --classic
 ```
