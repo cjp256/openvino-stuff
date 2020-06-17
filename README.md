@@ -22,11 +22,28 @@ $ reboot
 
 # Build Instructions
 
-Build the examples snap (all-in-one, openvino + opencv + examples):
+Build/install snapcraft with OpenVINO extension:
+
+```
+$ git clone git://github.com/cjp256/snapcraft --branch openvino
+$ snapcraft snap
+$ sudo snap install *.snap --dangerous --classic
+```
+
+Build/install the OpenVINO toolkit snap (from source):
+
+```
+$ cd openvino-toolkit-from-source
+$ snapcraft snap
+$ sudo snap install *.snap --dangerous
+```
+
+Build/install the OpenVINO examples:
 
 ```
 $ cd openvino-examples-snap
-$ snapcraft --use-lxd
+$ snapcraft snap
+$ sudo snap install *.snap --dangerous
 ```
 
 # Run Instructions
