@@ -13,9 +13,9 @@ parts:
     source: https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2.tar.gz
     plugin: nil
     override-build: |
-      ./bootstrap
+      ./bootstrap --prefix=/usr
       make -j4
-      make install DESTDIR=/
+      make install DESTDIR=$SNAPCRAFT_PART_INSTALL
     build-environment:
       - PATH: /usr/lib/ccache:$PATH
     build-packages:
