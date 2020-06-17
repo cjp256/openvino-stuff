@@ -26,7 +26,7 @@ parts:
     override-build: |
       snapcraftctl build
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
-      cp -rv inference-engine/samples/intel64/Release/* $SNAPCRAFT_PART_INSTALL/bin
+      cp -rv inference-engine/samples/*/Release/* $SNAPCRAFT_PART_INSTALL/bin
     stage-packages:
       - libjbig0
       - libjpeg-turbo8
