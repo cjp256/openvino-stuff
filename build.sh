@@ -1,3 +1,7 @@
+#!/bin/bash -x
+
+set -e
+
 if [ -d snapcraft ]; then
   pushd snapcraft
   git pull
