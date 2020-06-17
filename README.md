@@ -33,7 +33,7 @@ $ sudo snap install *.snap --dangerous --classic
 Build/install the OpenVINO toolkit snap (from source):
 
 ```
-$ cd openvino-toolkit-from-source
+$ cd snaps/openvino-toolkit-unofficial
 $ snapcraft snap
 $ sudo snap install *.snap --dangerous
 ```
@@ -41,7 +41,7 @@ $ sudo snap install *.snap --dangerous
 Build/install the OpenVINO examples:
 
 ```
-$ cd openvino-examples-snap
+$ cd snaps/openvino-examples-snap
 $ snapcraft snap
 $ sudo snap install *.snap --dangerous
 ```
