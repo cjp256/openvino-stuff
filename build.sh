@@ -1,4 +1,10 @@
-git clone git://github.com/cjp256/snapcraft -b openvino
+if [ -d snapcraft ]; then
+  pushd snapcraft
+  git pull
+  popd
+else
+  git clone git://github.com/cjp256/snapcraft -b openvino
+fi
 
 pushd snapcraft
 snapcraft clean
