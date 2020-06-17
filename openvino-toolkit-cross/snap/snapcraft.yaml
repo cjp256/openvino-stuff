@@ -1,6 +1,6 @@
 name: openvino-toolkit
 base: core18
-version: 2020
+version: "2020"
 summary: Intel's OpenVINO Toolkit
 description: |
   SDK to build OpenVINO applications
