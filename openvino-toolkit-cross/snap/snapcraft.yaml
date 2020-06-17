@@ -1,6 +1,6 @@
-name: openvino-sdk
+name: openvino-toolkit
 base: core18
-version: '2020.2.120'
+version: git
 summary: Intel's OpenVINO Toolkit
 description: |
   SDK to build OpenVINO applications
@@ -29,7 +29,7 @@ parts:
       - OpenCV_DIR: $SNAPCRAFT_STAGE/opencv
       - PATH: /usr/lib/ccache:$PATH
     override-build: |
-      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino $SNAPCRAFT_PART_SRC
+      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino -DTHREADING=SEQ -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC
       cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
       cmake --build . --target install -- DESTDIR=/
     build-packages:
