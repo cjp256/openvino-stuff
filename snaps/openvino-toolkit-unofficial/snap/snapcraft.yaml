@@ -1,4 +1,4 @@
-name: openvino-toolkit
+name: cjp256-openvino-toolkit-1804
 base: core18
 version: "2020"
 summary: Intel's OpenVINO Toolkit
