@@ -1,12 +1,12 @@
 name: cjp256-openvino-toolkit-1804
 base: core18
-version: "2020"
 summary: Intel's OpenVINO Toolkit
 description: |
   SDK to build OpenVINO applications
 
 grade: devel
 confinement: strict
+adopt-info: openvino
 
 parts:
   cmake:
@@ -30,6 +30,7 @@ parts:
       - OpenCV_DIR: $SNAPCRAFT_STAGE/opencv
       - PATH: /usr/lib/ccache:$PATH
     override-build: |
+      snapcraftctl set-version "$(git describe --tags --always)"
       cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino -DTHREADING=SEQ -DPYTHON_EXECUTABLE=/usr/bin/python3.6 -DTREAT_WARNING_AS_ERROR=OFF $SNAPCRAFT_PART_SRC
       cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
       cmake --build . --target install -- DESTDIR=/

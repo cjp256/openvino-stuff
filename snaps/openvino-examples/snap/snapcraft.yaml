@@ -1,12 +1,12 @@
 name: openvino-samples
 base: core18
-version: '2020.3.194'
 summary: Intel's OpenVINO Toolkit samples
 description: |
   Sample applications in OpenVINO.
 
 grade: devel
 confinement: strict
+adopt-info: openvino
 
 apps:
   benchmark-app:
@@ -17,15 +17,17 @@ parts:
   openvino:
     source: git://github.com/openvinotoolkit/openvino
     source-subdir: inference-engine/samples
-    source-branch: 2020.3.0
-    plugin: cmake    
-    configflags:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DPYTHON_EXECUTABLE=/usr/bin/python3.6
+    source-branch: "releases/2020/4"
+    plugin: cmake
     override-build: |
-      snapcraftctl build
+      snapcraftctl set-version "$(git describe --tags --always)"
+      cmake -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC_WORK
+      cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
+      cmake --build . --target install -- DESTDIR=/
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
-      cp -rv inference-engine/samples/*/Release/* $SNAPCRAFT_PART_INSTALL/bin
+      cp -v */Release/* $SNAPCRAFT_PART_INSTALL/bin/
+      mkdir -p $SNAPCRAFT_PART_INSTALL/lib
+      cp -v */Release/lib/* $SNAPCRAFT_PART_INSTALL/lib/
     stage-packages:
       - libjbig0
       - libjpeg-turbo8
