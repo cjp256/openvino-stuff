@@ -27,7 +27,3 @@ snapcraft clean
 snapcraft snap
 sudo snap install *.snap --dangerous
 popd
-
-pushd demo
-./run-benchmark-snap.sh
-popd
