@@ -22,12 +22,14 @@ $ reboot
 
 # Build Instructions
 
+NOTE: REQUIRES DESTRUCTIVE-MODE BECAUSE OF "BUILD SNAP"
+
 Build/install snapcraft with OpenVINO extension:
 
 ```
 $ git clone git://github.com/cjp256/snapcraft --branch openvino
 $ cd snapcraft
-$ snapcraft snap
+$ snapcraft snap --destructive-mode
 $ sudo snap install *.snap --dangerous --classic
 ```
 
@@ -35,7 +37,7 @@ Build/install the OpenVINO toolkit snap (from source):
 
 ```
 $ cd snaps/openvino-toolkit-unofficial
-$ snapcraft snap
+$ snapcraft snap --destructive-mode
 $ sudo snap install *.snap --dangerous
 ```
 
@@ -43,13 +45,13 @@ Build/install the OpenVINO examples:
 
 ```
 $ cd snaps/openvino-examples-snap
-$ snapcraft snap
+$ snapcraft snap --destructive-mode
 $ sudo snap install *.snap --dangerous
 ```
 
 # Run Instructions
 
-Install snap and connect required interfaces:
+Install snap (on host if using build container) and connect required interfaces:
 
 ```
 $ sudo snap install openvino-examples*.snap --dangerous
