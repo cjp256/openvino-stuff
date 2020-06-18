@@ -2,6 +2,8 @@
 
 set -e
 
+export SNAPCRAFT_BUILD_ENVIRONMENT=host
+
 if [ -d snapcraft ]; then
   pushd snapcraft
   git pull

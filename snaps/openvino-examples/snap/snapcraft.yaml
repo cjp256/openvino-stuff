@@ -22,7 +22,6 @@ parts:
     configflags:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPYTHON_EXECUTABLE=/usr/bin/python3.6
-      - -DCMAKE_INSTALL_PREFIX=/opt
     override-build: |
       snapcraftctl build
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
