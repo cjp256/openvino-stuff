@@ -61,7 +61,7 @@ parts:
     build-environment:
       - PATH: /usr/lib/ccache:$PATH
     override-build: |
-      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino/opencv $SNAPCRAFT_PART_SRC
+      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino/opencv -DPYTHON_DEFAULT_EXECUTABLE=$(which python3) -DINSTALL_PYTHON_EXAMPLES=ON -DBUILD_opencv_python3=ON $SNAPCRAFT_PART_SRC
       cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
       cmake --build . --target install -- DESTDIR=/
     build-packages:
@@ -79,6 +79,7 @@ parts:
       - libtiff-dev
       - pkg-config
       - python3-dev
+      - python3-numpy
     stage-packages:
       - libatk1.0-0
       - libavcodec57

@@ -24,7 +24,7 @@ snapcraft snap --destructive-mode
 sudo snap install *.snap --dangerous
 popd
 
-pushd snaps/openvino-examples
+pushd snaps/openvino-samples
 snapcraft clean
 snapcraft snap --destructive-mode
 sudo snap install *.snap --dangerous

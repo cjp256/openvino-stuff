@@ -44,7 +44,7 @@ $ sudo snap install *.snap --dangerous
 Build/install the OpenVINO examples:
 
 ```
-$ cd snaps/openvino-examples-snap
+$ cd snaps/openvino-samples
 $ snapcraft snap --destructive-mode
 $ sudo snap install *.snap --dangerous
 ```
