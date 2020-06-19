@@ -6,30 +6,39 @@ description: |
 
 grade: devel
 confinement: strict
-adopt-info: openvino
+adopt-info: openvino-examples
 
 apps:
   benchmark-app:
     command: bin/benchmark_app
     extensions: [openvino-2020-3]
+  benchmark-app-py:
+    command: python3.6 $SNAP/openvino/deployment_tools/tools/benchmark_tool/benchmark_app.py
+    extensions: [openvino-2020-3]
 
 parts:
-  openvino:
+  openvino-examples:
     source: git://github.com/openvinotoolkit/openvino
     source-subdir: inference-engine/samples
     source-branch: "releases/2020/4"
     plugin: cmake
     override-build: |
       snapcraftctl set-version "$(git describe --tags --always)"
-      cmake -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3.6 $SNAPCRAFT_PART_SRC_WORK
+      cmake -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL -DCMAKE_BUILD_TYPE=Release  -DENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3.6 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6 -DCYTHON_EXECUTABLE=$(which cython) $SNAPCRAFT_PART_SRC_WORK
       cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
       cmake --build . --target install -- DESTDIR=/
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
-      cp -v */Release/* $SNAPCRAFT_PART_INSTALL/bin/
-      mkdir -p $SNAPCRAFT_PART_INSTALL/lib
-      cp -v */Release/lib/* $SNAPCRAFT_PART_INSTALL/lib/
+      cp -rv */Release/* $SNAPCRAFT_PART_INSTALL/bin/
+      if [ -d */Release/lib ]; then mkdir -p $SNAPCRAFT_PART_INSTALL/lib; cp -v */Release/lib/* $SNAPCRAFT_PART_INSTALL/lib/; fi
     stage-packages:
+      - cython3
       - libjbig0
       - libjpeg-turbo8
       - libpng16-16
       - libtiff5
+      - py-cpuinfo
+      - python3
+      - python3-cpuinfo
+      - python3-numpy
+      - python3-opencv
+      - python3-progress

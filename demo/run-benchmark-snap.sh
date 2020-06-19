@@ -6,4 +6,5 @@ for x in hardware-observe home mount-observe network-bind network-control networ
   sudo snap connect openvino-samples:$x
 done
 
+openvino-samples.benchmark-app-py -m squeezenet1.1.xml -d MYRIAD
 openvino-samples.benchmark-app -m squeezenet1.1.xml -d MYRIAD
