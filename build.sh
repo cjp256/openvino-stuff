@@ -14,18 +14,12 @@ fi
 
 pushd snapcraft
 snapcraft clean
-snapcraft snap --destructive-mode
+snapcraft snap
 sudo snap install *.snap --classic --dangerous
-popd
-
-pushd snaps/openvino-toolkit-unofficial
-snapcraft clean
-snapcraft snap --destructive-mode
-sudo snap install *.snap --dangerous
 popd
 
 pushd snaps/openvino-samples
 snapcraft clean
-snapcraft snap --destructive-mode
+snapcraft snap
 sudo snap install *.snap --dangerous
 popd
